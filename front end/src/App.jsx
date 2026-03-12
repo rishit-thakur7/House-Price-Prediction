@@ -72,11 +72,9 @@ function App() {
       if (data.error) {
         setError(data.error);
       } else {
-        // backend now returns price_in_lakhs and price_in_inr
-        if (data.price_in_inr !== undefined) {
-          setPrice(data.price_in_inr);
-        } else if (data.price !== undefined) {
-          setPrice(data.price);
+        // Use price_in_lakhs from backend
+        if (data.price_in_lakhs !== undefined) {
+          setPrice(data.price_in_lakhs);
         } else {
           setError("Unexpected response from backend");
         }
@@ -247,7 +245,7 @@ function App() {
                   <IndianRupee className="w-8 h-8 text-blue-600" />
                   <span className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 
                                  bg-clip-text text-transparent">
-                    {price.toLocaleString()}
+                    {price.toLocaleString()} Lakhs
                   </span>
                 </div>
                 <p className="text-xs text-gray-500 text-center mt-2">
