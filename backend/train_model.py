@@ -2,8 +2,13 @@ import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 from sklearn.linear_model import LinearRegression
 import joblib
+import os
+from dotenv import load_dotenv
 
-df = pd.read_csv("data/house_price_india.csv")
+load_dotenv()
+
+data_path = os.getenv("DATA_PATH", "data/house_price_india.csv")
+df = pd.read_csv(data_path)
 
 df = df[['city', 'bhk', 'area_sqft', 'price_in_inr']]
 

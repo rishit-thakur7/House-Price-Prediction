@@ -20,8 +20,10 @@ function App() {
   const bhkOptions = [1, 2, 3, 4, 5, 6];
   const sizeOptions = [500, 750, 900, 1000, 1200, 1500, 1800, 2000, 2500];
 
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+
   useEffect(() => {
-    fetch("http://localhost:8000/locations")
+    fetch(`${API_URL}/locations`)
       .then(res => res.json())
       .then(data => {
         setCities(data.locations);
@@ -55,7 +57,7 @@ function App() {
     setPrice(null);
 
     try {
-      const res = await fetch("http://localhost:8000/predict", {
+      const res = await fetch(`${API_URL}/predict`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
