@@ -69,8 +69,18 @@ function App() {
 
       const data = await res.json();
 
-      if (data.error) setError(data.error);
-      else setPrice(data.price);
+      if (data.error) {
+        setError(data.error);
+      } else {
+        // backend now returns price_in_lakhs and price_in_inr
+        if (data.price_in_inr !== undefined) {
+          setPrice(data.price_in_inr);
+        } else if (data.price !== undefined) {
+          setPrice(data.price);
+        } else {
+          setError("Unexpected response from backend");
+        }
+      }
     } catch {
       setError("Backend not responding");
     }
