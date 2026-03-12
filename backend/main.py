@@ -5,12 +5,10 @@ import joblib
 import os
 from dotenv import load_dotenv
 
-# load environment variables from .env (if present)
 load_dotenv()
 
 app = FastAPI()
 
-# configure CORS origins via environment variable (comma‑separated), default to all
 cors_origins = os.getenv("CORS_ORIGINS", "*")
 allow_origins = [o.strip() for o in cors_origins.split(",")] if cors_origins != "*" else ["*"]
 
@@ -38,14 +36,23 @@ def home():
 
 @app.get("/locations")
 def get_locations():
-    return {"locations": encoder.classes_.tolist()}
+    return {"locations": sorted(encoder.classes_.tolist())}
 
 @app.post("/predict")
 def predict(data: HouseInput):
     try:
         loc = encoder.transform([data.location])[0]
-    except:
-        return {"error": "Invalid city name"}
+    except ValueError:
+        return {"error": f"Invalid city name '{data.location}'. Use /locations to see valid options."}
 
-    price = model.predict([[loc, data.bhk, data.size]])[0]
-    return {"price": round(float(price), 2)}
+    # Model was trained on price_in_lakhs — result is already in lakhs
+    price_lakhs = model.predict([[loc, data.bhk, data.size]])[0]
+    price_inr = round(price_lakhs * 100_000, 2)
+
+    return {
+        "price_in_lakhs": round(float(price_lakhs), 2),
+        "price_in_inr": price_inr,
+        "location": data.location,
+        "bhk": data.bhk,
+        "size_sqft": data.size,
+    }
