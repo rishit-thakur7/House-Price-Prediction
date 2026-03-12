@@ -138,7 +138,7 @@ function App() {
                   onChange={handleCityChange}
                   onFocus={() => setShowDropdown(true)}
                   onBlur={() => setTimeout(() => setShowDropdown(false), 200)}
-                  className="input-field pl-10"
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-gray-700 placeholder-gray-400 pl-10"
                 />
                 <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 
                                  w-4 h-4 text-gray-400" />
@@ -170,7 +170,7 @@ function App() {
                 name="bhk"
                 value={form.bhk}
                 onChange={handleChange}
-                className="select-field"
+                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-gray-700 cursor-pointer appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwb2x5bGluZSBwb2ludHM9IjYgOSAxMiAxNSAxOCA5Ij48L3BvbHlsaW5lPjwvc3ZnPg==')] bg-no-repeat bg-[center_right_1rem] bg-[length:20px]"
               >
                 <option value="">Select number of bedrooms</option>
                 {bhkOptions.map(b => (
@@ -193,7 +193,7 @@ function App() {
                   placeholder="Enter area in sq ft"
                   value={form.size}
                   onChange={handleChange}
-                  className="input-field pl-10"
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-gray-700 placeholder-gray-400 pl-10"
                 />
                 <Ruler className="absolute left-3 top-1/2 transform -translate-y-1/2 
                                 w-4 h-4 text-gray-400" />
@@ -209,7 +209,7 @@ function App() {
             <button
               onClick={predictPrice}
               disabled={loading || !isFormValid}
-              className="btn-primary mt-6 flex items-center justify-center gap-2"
+              className="w-full px-6 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-blue-800 transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-lg hover:shadow-xl mt-6 flex items-center justify-center gap-2"
             >
               {loading ? (
                 <>
@@ -231,7 +231,7 @@ function App() {
             )}
 
             {price && (
-              <div className="result-card">
+              <div className="mt-6 p-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-100">
                 <p className="text-sm text-blue-600 font-medium mb-2">Estimated Price</p>
                 <div className="flex items-center justify-center gap-2">
                   <IndianRupee className="w-8 h-8 text-blue-600" />
